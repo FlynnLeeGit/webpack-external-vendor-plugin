@@ -1,6 +1,6 @@
 {
   "name": "webpack-external-vendor-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "description": "useful for some libiaries which are included globally",
   "scripts": {
