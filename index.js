@@ -8,13 +8,15 @@ const schema = require('./schema.json')
 
 const getFilePath = (filePath, name, fileHash) => {
   const hashReg = /\[hash(?:(?::)([\d]+))?\]/
-  const hashResult = filePath.match(hashReg)
-  // needed hash lenth
-  const hashLength = hashResult[1] ? Number(hashResult[1]) : 20
+  let finalPath = filePath.replace('[name]', name)
 
-  return filePath
-    .replace('[name]', name)
-    .replace(hashReg, fileHash.slice(0, hashLength))
+  if (hashReg.test(finalPath)) {
+    const hashResult = finalPath.match(hashReg)
+    // needed hash lenth
+    const hashLength = hashResult[1] ? Number(hashResult[1]) : 20
+    return finalPath.replace(hashReg, fileHash.slice(0, hashLength))
+  }
+  return finalPath
 }
 
 const getContent = path => {
@@ -86,7 +88,7 @@ const WebpackExternalVendorPlugin = class {
     // add moudle assets
     compiler.plugin('emit', (compilation, callback) => {
       files.forEach(f => {
-        console.log(f.name,f.filename)
+        console.log(f.name, f.filename)
         compilation.applyPlugins(
           'module-asset',
           {

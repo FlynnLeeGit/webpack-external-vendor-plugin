@@ -15,7 +15,6 @@ const jsConfig = createConfig([
           'vue/dist/vue.js'
         ]
       },
-      filename: 'static/js/[name].js?[hash:8]',
       externals: {
         jquery: 'jQuery',
         vue: 'Vue'
