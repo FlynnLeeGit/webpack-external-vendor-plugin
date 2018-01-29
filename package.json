@@ -1,5 +1,8 @@
 {
   "name": "webpack-external-vendor-plugin",
+  "version": "0.0.2",
+  "main": "index.js",
+  "description": "useful for some libiaries which are included globally",
   "scripts": {
     "test": "cd examples && rm -rf dist && webpack --progress -w"
   },
@@ -7,6 +10,19 @@
     "fs-extra": "^5.0.0",
     "webpack-merge": "^4.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url":
+      "git+https://github.com/FlynnLeeGit/webpack-external-vendor-plugin.git"
+  },
+  "keywords": ["webpack", "external", "vendor", "libs", "plugin"],
+  "author": "flynnlee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FlynnLeeGit/webpack-external-vendor-plugin/issues"
+  },
+  "homepage":
+    "https://github.com/FlynnLeeGit/webpack-external-vendor-plugin#readme",
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
     "css-loader": "^0.28.9",

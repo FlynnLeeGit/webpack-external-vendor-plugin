@@ -35,4 +35,4 @@ const ExternalVendorPlugin = require('webpack-external-vendor-plugin')
 }
 ```
 
-options.externals see [webpack.external](https://webpack.js.org/configuration/externals/#externals)
+options.externals see [webpack.externals](https://webpack.js.org/configuration/externals/#externals)
