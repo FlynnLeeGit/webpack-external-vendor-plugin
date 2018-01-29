@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "entry": {
+      "type": "object"
+    },
+    "filename": {
+      "type": "string"
+    },
+    "externals": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
