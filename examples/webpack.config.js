@@ -7,12 +7,6 @@ const jsConfig = createConfig([
   bricks.entry(),
   bricks.output(),
   addPlugin(
-    new ConcatPlugin({
-      filesToConcat: ['jquery/dist/jquery.min'],
-      fileName: 'concat.[hash:9].js'
-      // name: 'concat'
-      // uglify: true
-    }),
     new ExternalVendorPlugin({
       entry: {
         external_vendor: [
