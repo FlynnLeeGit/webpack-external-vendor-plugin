@@ -88,7 +88,6 @@ const WebpackExternalVendorPlugin = class {
     // add moudle assets
     compiler.plugin('emit', (compilation, callback) => {
       files.forEach(f => {
-        console.log(f.name, f.filename)
         compilation.applyPlugins(
           'module-asset',
           {
