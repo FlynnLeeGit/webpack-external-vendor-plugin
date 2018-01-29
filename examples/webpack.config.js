@@ -24,4 +24,13 @@ const jsConfig = createConfig([
   )
 ])
 
-module.exports = [jsConfig]
+const styleConfig = createConfig([
+  bricks.entry({
+    common_default: './src/common_default.less'
+  }),
+  bricks.output(),
+  bricks.less(),
+  addPlugin(new ManifestExtraPlugin())
+])
+
+module.exports = [jsConfig, styleConfig]
