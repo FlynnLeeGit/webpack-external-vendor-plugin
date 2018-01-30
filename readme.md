@@ -2,6 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin.svg?style=svg)](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin)
 
+[![npm](https://img.shields.io/npm/dw/localeval.svg)]()
+
 useful for some libiaries which are included globally,it will inject global variables in webpack,then all deps can use external modules
 
 ## Usage
