@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1517306141635" clover="3.2.0">
+  <project timestamp="1517306141635" name="All files">
+    <metrics statements="48" coveredstatements="48" conditionals="9" coveredconditionals="7" methods="12" coveredmethods="12" elements="69" coveredelements="67" complexity="0" loc="48" ncloc="48" packages="1" files="1" classes="1">
+      <file name="index.js" path="/Users/lee/Documents/company/webpack-external-vendor-plugin/index.js">
+        <metrics statements="48" coveredstatements="48" conditionals="9" coveredconditionals="7" methods="12" coveredmethods="12"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="13" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="9" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="10" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="5" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="6" type="stmt"/>
+        <line num="50" count="5" type="stmt"/>
+        <line num="55" count="5" type="stmt"/>
+        <line num="57" count="5" type="stmt"/>
+        <line num="58" count="5" type="stmt"/>
+        <line num="60" count="5" type="stmt"/>
+        <line num="61" count="5" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="64" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="65" count="5" type="stmt"/>
+        <line num="66" count="5" type="stmt"/>
+        <line num="67" count="5" type="stmt"/>
+        <line num="71" count="5" type="stmt"/>
+        <line num="72" count="5" type="stmt"/>
+        <line num="80" count="5" type="stmt"/>
+        <line num="81" count="5" type="stmt"/>
+        <line num="83" count="5" type="stmt"/>
+        <line num="86" count="7" type="stmt"/>
+        <line num="90" count="5" type="stmt"/>
+        <line num="95" count="5" type="stmt"/>
+        <line num="96" count="5" type="stmt"/>
+        <line num="97" count="5" type="stmt"/>
+        <line num="105" count="5" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
+      </file>
+    </metrics>
+  </project>
+</coverage>

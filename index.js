@@ -19,14 +19,18 @@ const getFilePath = (filePath, name, fileHash) => {
   return finalPath
 }
 
-const getContent = path => {
-  // use require to resolve
-  const modulePath = require.resolve(path)
-  return fse.readFileSync(modulePath, 'utf-8')
+const getContent = (file, ctx) => {
+  // if relative use fileSystem to read
+  if (file[0] === '.') {
+    return fse.readFileSync(path.join(ctx, file), 'utf-8')
+  }
+
+  // use require to resolve module path
+  return fse.readFileSync(require.resolve(file), 'utf-8')
 }
 
-const getConcatContent = modules =>
-  modules.reduce((a, b) => a + getContent(b), '')
+const getConcatContent = (modules, ctx) =>
+  modules.reduce((a, b) => a + getContent(b, ctx), '')
 
 const getMd5Hash = content => {
   return createHash('md5')
@@ -45,7 +49,6 @@ const WebpackExternalVendorPlugin = class {
     validateOptions(schema, config, '[WebpackExternalVendorPlugin]')
     this.config = merge(defaultConfig, config)
   }
-  resolveModule() {}
 
   apply(compiler) {
     // 添加 外部依赖
@@ -61,7 +64,10 @@ const WebpackExternalVendorPlugin = class {
       if (first) {
         files = Object.keys(this.config.entry).map(name => {
           const vendorPaths = this.config.entry[name]
-          const vendorContent = getConcatContent(vendorPaths)
+          const vendorContent = getConcatContent(
+            vendorPaths,
+            compiler.options.context
+          )
           const hash = getMd5Hash(vendorContent)
           return {
             name,
