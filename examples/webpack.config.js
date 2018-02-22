@@ -1,12 +1,11 @@
-const { createConfig, addPlugin, bricks } = require('webpack-bricks')
-
+const $ = require('webpack-bricks')
 const ExternalVendorPlugin = require('../index')
 const ManifestExtraPlugin = require('webpack-manifest-extra-plugin')
 
-const jsConfig = createConfig([
-  bricks.entry(),
-  bricks.output(),
-  addPlugin(
+const jsTask = $().lay(
+  $.entry(),
+  $.output(),
+  $.plugins([
     new ExternalVendorPlugin({
       entry: {
         external_vendor: [
@@ -21,16 +20,16 @@ const jsConfig = createConfig([
       }
     }),
     new ManifestExtraPlugin()
-  )
-])
+  ])
+)
 
-const styleConfig = createConfig([
-  bricks.entry({
+const styleTask = $().lay(
+  $.entry({
     common_default: './src/common_default.less'
   }),
-  bricks.output(),
-  bricks.less(),
-  addPlugin(new ManifestExtraPlugin())
-])
+  $.output(),
+  $.less(),
+  $.plugin(new ManifestExtraPlugin())
+)
 
-module.exports = [jsConfig, styleConfig]
+module.exports = Promise.all([jsTask, styleTask])

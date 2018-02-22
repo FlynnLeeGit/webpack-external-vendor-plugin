@@ -10,6 +10,7 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "globby": "^7.1.1",
+    "webpack-bricks": "0.5.3",
     "webpack-merge": "^4.1.1"
   },
   "repository": {
