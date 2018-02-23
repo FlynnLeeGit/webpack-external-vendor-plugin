@@ -4114,23 +4114,22 @@ webidl-conversions@^4.0.1, webidl-conversions@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
 
-webpack-bricks@0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/webpack-bricks/-/webpack-bricks-0.5.3.tgz#d91f03740791712c1d2e2d5cc5264d56b5ee891d"
+webpack-bricks@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/webpack-bricks/-/webpack-bricks-0.6.0.tgz#52f2799ed693b0f3f5ae3a6a1ee4eb3f3c4047f2"
   dependencies:
     chalk "^2.3.0"
     config-brick "^3.0.0"
     lodash "^4.17.4"
     yarn-install "^0.5.1"
 
-webpack-manifest-extra-plugin@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/webpack-manifest-extra-plugin/-/webpack-manifest-extra-plugin-0.0.4.tgz#5d0cfc02fe6ed7b86d1d1f6a0290e7bb4b66cac3"
+webpack-manifest-extra-plugin@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/webpack-manifest-extra-plugin/-/webpack-manifest-extra-plugin-0.1.4.tgz#77aaf1219f05e30dbe554e8a2077602bcb4d5a6e"
   dependencies:
     fs-extra "^5.0.0"
     lodash "^4.17.4"
     schema-utils "^0.4.3"
-    webpack-merge "^4.1.1"
 
 webpack-merge@^4.1.1:
   version "4.1.1"

@@ -32,4 +32,4 @@ const styleTask = $().lay(
   $.plugin(new ManifestExtraPlugin())
 )
 
-module.exports = Promise.all([jsTask, styleTask])
+module.exports = [jsTask, styleTask]

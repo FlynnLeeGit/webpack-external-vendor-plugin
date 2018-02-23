@@ -10,7 +10,7 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "globby": "^7.1.1",
-    "webpack-bricks": "0.5.3",
+    "webpack-bricks": "0.6.0",
     "webpack-merge": "^4.1.1"
   },
   "repository": {
@@ -43,7 +43,7 @@
     "style-loader": "^0.20.1",
     "vue": "^2.5.13",
     "webpack": "^3.10.0",
-    "webpack-manifest-extra-plugin": "^0.0.4"
+    "webpack-manifest-extra-plugin": "^0.1.4"
   },
   "jest": {
     "verbose": true,
