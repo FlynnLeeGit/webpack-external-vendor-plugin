@@ -6,9 +6,6 @@
     },
     "filename": {
       "type": "string"
-    },
-    "externals": {
-      "type": "object"
     }
   },
   "additionalProperties": false

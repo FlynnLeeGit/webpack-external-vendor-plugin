@@ -24,13 +24,13 @@ const getContent = (file, ctx) => {
   if (file[0] === '.') {
     return fse.readFileSync(path.join(ctx, file), 'utf-8')
   }
-
   // use require to resolve module path
   return fse.readFileSync(require.resolve(file), 'utf-8')
 }
 
-const getConcatContent = (modules, ctx) =>
-  modules.reduce((a, b) => a + getContent(b, ctx), '')
+const getConcatContent = (modules, ctx) => {
+  return modules.reduce((a, b) => a + getContent(b, ctx), '')
+}
 
 const getMd5Hash = content => {
   return createHash('md5')
@@ -40,70 +40,68 @@ const getMd5Hash = content => {
 
 const defaultConfig = {
   entry: {},
-  filename: '[name].js',
-  externals: {}
+  filename: '[name].js'
 }
 
 const WebpackExternalVendorPlugin = class {
   constructor(config = {}) {
+    this.name = 'WebpackExternalVendorPlugin'
     validateOptions(schema, config, '[WebpackExternalVendorPlugin]')
     this.config = merge(defaultConfig, config)
   }
 
   apply(compiler) {
-    // 添加 外部依赖
-    compiler.options.externals = this.config.externals
-
-    const webpackPublicPath = compiler.options.output.publicPath
-    const webpackOutputPath = compiler.options.output.path
-
-    let first = true
+    this.compiler = compiler
+    this.webpackOptions = compiler.options
+    this.context = compiler.context
+    compiler.hooks.compilation.tap(this.name, this.applyHtmlPlugin.bind(this))
+  }
+  applyHtmlPlugin(compilation) {
+    let firstCompile = true
     let files = []
-
-    compiler.plugin('compilation', compilation => {
-      if (first) {
-        files = Object.keys(this.config.entry).map(name => {
-          const vendorPaths = this.config.entry[name]
-          const vendorContent = getConcatContent(
-            vendorPaths,
-            compiler.options.context
-          )
-          const hash = getMd5Hash(vendorContent)
-          return {
-            name,
-            source: vendorContent,
-            size: vendorContent.length,
-            filename: getFilePath(this.config.filename, name, hash)
-          }
-        })
-
-        files.forEach(f => {
-          compilation.assets[f.filename] = {
-            source() {
-              return f.source
-            },
-            size() {
-              return f.size
-            }
-          }
-        })
-        first = false
-      }
-    })
-
-    // add moudle assets
-    compiler.plugin('emit', (compilation, callback) => {
-      files.forEach(f => {
-        compilation.applyPlugins(
-          'module-asset',
-          {
-            userRequest: f.name + '.js'
-          },
-          f.filename
-        )
+    if (firstCompile) {
+      files = Object.keys(this.config.entry).map(name => {
+        const vendorPaths = this.config.entry[name]
+        const vendorContent = getConcatContent(vendorPaths, this.context)
+        const hash = getMd5Hash(vendorContent)
+        const file = {
+          name,
+          source: vendorContent,
+          size: vendorContent.length,
+          filename: getFilePath(this.config.filename, name, hash)
+        }
+        return file
       })
-      callback()
-    })
+      files.forEach(f => {
+        compilation.assets[f.filename] = {
+          source() {
+            return f.source
+          },
+          size() {
+            return f.size
+          }
+        }
+      })
+      firstCompile = false
+    }
+
+    const hook = compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration
+    const webpackPublicPath = this.webpackOptions.output.publicPath || '/'
+    if (hook) {
+      hook.tapAsync(this.name, appendToChunks)
+    }
+    function appendToChunks(data, callback) {
+      files.forEach(f => {
+        data.assets.js = [webpackPublicPath + f.filename, ...data.assets.js]
+        data.assets.chunks = {
+          [f.name]: {
+            entry: webpackPublicPath + f.filename
+          },
+          ...data.assets.chunks
+        }
+      })
+      callback(null, data)
+    }
   }
 }
 
