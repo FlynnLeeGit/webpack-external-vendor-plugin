@@ -97,7 +97,7 @@ const WebpackExternalVendorPlugin = class {
           data.assets.js = [webpackPublicPath + f.filename, ...data.assets.js]
         }
         if (f.ext === '.css') {
-          data.assets.css = [webpackPublicPath + f.filename, ...data.assets.js]
+          data.assets.css = [webpackPublicPath + f.filename, ...data.assets.css]
         }
         data.assets.chunks = {
           [f.name]: {
