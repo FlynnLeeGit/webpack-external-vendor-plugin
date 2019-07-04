@@ -34,7 +34,8 @@ const WebpackBuilder = class {
               {},
               {
                 entry: {
-                  external_vendor: ['./fixtures/1.js', './fixtures/2.js']
+                  external_vendor: ['./fixtures/1.js', './fixtures/2.js'],
+                  base: ['./fixtures/1.css', './fixtures/2.css']
                 }
               },
               pluginUserConfig
@@ -75,7 +76,7 @@ describe('WebpackExternalVendorPlugin', () => {
 
     test('should produce one file', done => {
       new WebpackBuilder().compile(vendor => {
-        expect(vendor).toBe(';console.log(1);console.log(2)')
+        expect(vendor).toBe(';console.log(1)\r\n;console.log(2)')
         done()
       })
     })
@@ -98,13 +99,13 @@ describe('WebpackExternalVendorPlugin', () => {
       new WebpackBuilder(
         {},
         {
-          filename: '[name].js?[hash]'
+          filename: '[name][ext]?[hash]'
         }
       ).compile((vendor, stats) => {
         const assets = stats.toJson().assets
         expect(
           _.find(assets, {
-            name: 'external_vendor.js?3b419e666b37fefdbf8e'
+            name: 'external_vendor.js?87ff1ce64ba00b82a289'
           })
         ).toBeDefined()
         done()
@@ -115,13 +116,13 @@ describe('WebpackExternalVendorPlugin', () => {
       new WebpackBuilder(
         {},
         {
-          filename: '[name].js?[hash:5]'
+          filename: '[name][ext]?[hash:5]'
         }
       ).compile((vendor, stats) => {
         const assets = stats.toJson().assets
         expect(
           _.find(assets, {
-            name: 'external_vendor.js?3b419'
+            name: 'external_vendor.js?87ff1'
           })
         ).toBeDefined()
         done()
@@ -132,12 +133,13 @@ describe('WebpackExternalVendorPlugin', () => {
       new WebpackBuilder(
         {},
         {
-          filename: 'static/externals.js'
+          filename: 'static/externals[ext]'
         }
       ).compile((__, stats) => {
         const urls = new Urls('static/externals')
         const vendor = fse.readFileSync(urls.externalFile, 'utf-8')
-        expect(vendor).toBe(';console.log(1);console.log(2)')
+        console.log(vendor)
+        expect(vendor).toBe(';console.log(1)\r\n;console.log(2)')
         done()
       })
     })

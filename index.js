@@ -6,13 +6,12 @@ const createHash = require('crypto').createHash
 
 const schema = require('./schema.json')
 
-const getFilePath = (filePath, name, fileHash) => {
+const getFilePath = (filePath, name, fileHash, ext) => {
   const hashReg = /\[hash(?:(?::)([\d]+))?\]/
-  let finalPath = filePath.replace('[name]', name)
-
+  let finalPath = filePath.replace('[name]', name).replace('[ext]', ext)
   if (hashReg.test(finalPath)) {
     const hashResult = finalPath.match(hashReg)
-    // needed hash lenth
+    // needed hash length
     const hashLength = hashResult[1] ? Number(hashResult[1]) : 20
     return finalPath.replace(hashReg, fileHash.slice(0, hashLength))
   }
@@ -29,7 +28,7 @@ const getContent = (file, ctx) => {
 }
 
 const getConcatContent = (modules, ctx) => {
-  return modules.reduce((a, b) => a + getContent(b, ctx), '')
+  return modules.map(m => getContent(m, ctx)).join('\r\n')
 }
 
 const getMd5Hash = content => {
@@ -40,7 +39,7 @@ const getMd5Hash = content => {
 
 const defaultConfig = {
   entry: {},
-  filename: '[name].js'
+  filename: '[name][ext]'
 }
 
 const WebpackExternalVendorPlugin = class {
@@ -64,11 +63,13 @@ const WebpackExternalVendorPlugin = class {
         const vendorPaths = this.config.entry[name]
         const vendorContent = getConcatContent(vendorPaths, this.context)
         const hash = getMd5Hash(vendorContent)
+        const ext = path.extname(vendorPaths[0]) || '.js'
         const file = {
           name,
           source: vendorContent,
           size: vendorContent.length,
-          filename: getFilePath(this.config.filename, name, hash)
+          ext: ext,
+          filename: getFilePath(this.config.filename, name, hash, ext)
         }
         return file
       })
@@ -92,7 +93,12 @@ const WebpackExternalVendorPlugin = class {
     }
     function appendToChunks(data, callback) {
       files.forEach(f => {
-        data.assets.js = [webpackPublicPath + f.filename, ...data.assets.js]
+        if (f.ext === '.js') {
+          data.assets.js = [webpackPublicPath + f.filename, ...data.assets.js]
+        }
+        if (f.ext === '.css') {
+          data.assets.css = [webpackPublicPath + f.filename, ...data.assets.js]
+        }
         data.assets.chunks = {
           [f.name]: {
             entry: webpackPublicPath + f.filename
