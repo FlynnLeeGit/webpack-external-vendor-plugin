@@ -1,6 +1,6 @@
 ## webpack-external-vendor-plugin
 
-[![CircleCI](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin.svg?style=svg)](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin)
+<!-- [![CircleCI](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin.svg?style=svg)](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin) -->
 
 * can captiable with html-webpack-plugin@4
 
