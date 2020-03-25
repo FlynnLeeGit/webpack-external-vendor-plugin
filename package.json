@@ -1,6 +1,6 @@
 {
   "name": "webpack-external-vendor-plugin",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "main": "index.js",
   "description": "useful for some libiaries which are included globally",
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "globby": "^7.1.1",
+    "safe-require": "^1.0.3",
     "webpack-bricks": "0.6.0",
     "webpack-merge": "^4.1.1"
   },

@@ -2,8 +2,12 @@
 
 [![CircleCI](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin.svg?style=svg)](https://circleci.com/gh/FlynnLeeGit/webpack-external-vendor-plugin)
 
-for webpack 4.0
+* can captiable with html-webpack-plugin@4
+
+* for webpack 4.0
 useful for some libiaries which are included globally,it will inject global variables in webpack,then all deps can use external modules
+
+
 
 ## Usage
 
@@ -23,10 +27,13 @@ const ExternalVendorPlugin = require('webpack-external-vendor-plugin')
       filename: 'static/[name].js?[hash:7]', // default [name].js
       // notice all js files you need include the browser version
       entry: {
-        external_vendor: [
+        base_vendors: [
           'jquery/dist/jquery.min',
           'vue/dist/vue.js',
           'babel-polyfill/dist/polyfill.min.js'
+        ],
+        base_style:[
+          
         ]
       }
     })
